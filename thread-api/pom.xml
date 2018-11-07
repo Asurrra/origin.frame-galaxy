@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.cyw.origin.frame</groupId>
+    <artifactId>origin.thread-api</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>thread-api</name>
+    <description>thread-api</description>
+
+    <parent>
+        <groupId>com.cyw.origin.frame</groupId>
+        <artifactId>origin.frame-galaxy</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.cyw.origin.frame</groupId>
+            <artifactId>galaxy-interface</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cyw.origin.frame</groupId>
+            <artifactId>galaxy-common</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>supplier-api</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                        <encoding>${encoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.10</version>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.0.1</version>
+                    <configuration>
+                        <attach>true</attach>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <!--<distributionManagement>
+        <repository>
+            <id>weimob.repo</id>
+            <name>Nexus Release Repository</name>
+            <url>http://maven.weimob.com/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>weimob.repo</id>
+            <name>Nexus Snapshot Repositoryname>
+            <url>http://maven.weimob.com/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>-->
+
+</project>

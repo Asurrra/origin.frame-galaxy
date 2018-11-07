@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cyw.origin.frame.galaxy.demo.dao.DemoDao">
+    <resultMap id="queryResultMap" type="com.cyw.origin.frame.galaxy.demo.domain.Demo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="TINYINT"/>
+        <result column="birthday" property="birthday" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        , `name`
+        , age
+        , birthday
+    </sql>
+
+    <sql id="query_condition">
+        <if test="query.name !=null">
+            and `name` = #{query.name,jdbcType = VARCHAR}
+        </if>
+        <if test="query.age !=null">
+            and age = #{query.age,jdbcType = TINYINT}
+        </if>
+    </sql>
+
+    <select id="findByCondition" resultMap="queryResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM demo
+        <where>
+            <include refid="query_condition"/>
+        </where>
+        <choose>
+            <when test="query.orderName == null">
+                ORDER BY id desc
+            </when>
+            <otherwise>
+                ORDER BY ${query.orderName} ${query.orderName}
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findTotalCount" resultType="java.lang.Integer">
+        SELECT count(1) FROM demo
+        <where>
+            <include refid="query_condition"/>
+        </where>
+    </select>
+
+    <insert id="save" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
+    INSERT INTO demo
+    (
+      `name`
+      , age
+      , birthday
+    )
+    VALUES (
+      #{entity.name, jdbcType = VARCHAR}
+      , #{entity.age, jdbcType = TINYINT}
+      , #{entity.birthday, jdbcType = TIMESTAMP}
+    )
+    </insert>
+
+    <insert id="saveSelective" keyProperty="entity.id" keyColumn="id" useGeneratedKeys="true">
+        INSERT INTO demo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="entity.name != null">
+                `name`
+            </if>
+            <if test="entity.age != null">
+                , age
+            </if>
+            <if test="entity.birthday != null">
+                , birthday
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="entity.name != null">
+                #{entity.name,jdbcType = VARCHAR}
+            </if>
+            <if test="entity.age != null">
+                , #{entity.age,jdbcType = TINYINT}
+            </if>
+            <if test="entity.birthday != null">
+                , #{entity.birthday,jdbcType = TIMESTAMP}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update">
+        UPDATE demo
+        SET
+        `name` = #{entity.name,jdbcType = VARCHAR}
+        , age = #{entity.age,jdbcType = TINYINT}
+        , birthday = #{entity.birthday,jdbcType = TIMESTAMP}
+        WHERE id = #{entity.id,jdbcType = BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKeySelective">
+        UPDATE demo
+        <set>
+            <if test="entity.name != null">
+                `name` = #{entity.name,jdbcType=VARCHAR}
+            </if>
+            <if test="entity.age != null">
+                , age = #{entity.age,jdbcType=TINYINT}
+            </if>
+            <if test="entity.birthday != null">
+                , birthday = #{entity.birthday,jdbcType=TIMESTAMP}
+            </if>
+        </set>
+        where id = #{entity.id,jdbcType=BIGINT}
+    </update>
+
+    <select id="getByPrimaryKey" resultMap="queryResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM demo
+        WHERE id = #{id, jdbcType = BIGINT}
+    </select>
+
+    <select id="get" resultMap="queryResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM demo
+        WHERE id = #{query.id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="delByPrimaryKey">
+        DELETE FROM demo
+        WHERE id = #{id ,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="del">
+        DELETE FROM demo
+        WHERE id = #{entity.id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="saveBatch">
+        INSERT INTO demo
+        (
+        `name`
+        , age
+        , birthday
+        )
+        VALUES
+        <foreach collection="entities" index="index" item="entity" separator=",">
+            (
+            #{entity.name,jdbcType = VARCHAR}
+            , #{entity.age,jdbcType = TINYINT}
+            , #{entity.birthday,jdbcType = TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+    <!-- Customer SQL Area -->
+
+    <!-- Customer SQL Area -->
+
+</mapper>

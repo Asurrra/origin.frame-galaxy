@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <context:annotation-config/>
+    <context:component-scan base-package="com.cyw.origin.frame.galaxy"/>
+
+    <!--<dubbo:application name="${dubbo.application.name}" owner="${dubbo.application.owner}"/>-->
+    <!--<dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}" />-->
+    <!--<dubbo:registry address="${dubbo.registry.address}"/>-->
+    <!--<dubbo:monitor protocol="${dubbo.monitor.protocol}"/>-->
+
+    <!--<bean id="proxyInvokeService" class="com.weimob.soa.common.proxy.service.impl.ProxyInvokeServiceImpl"></bean>-->
+
+    <!--<dubbo:service interface="com.weimob.soa.common.proxy.service.ProxyInvokeService"-->
+                   <!--ref="proxyInvokeService" />-->
+
+</beans>

@@ -1,0 +1,42 @@
+######### tomcat端口 #########
+server:
+  port: 8080   # 端口号
+#  context-path: /galaxy   # 访问地址
+#  address: 127.0.0.1   # 服务器启动ip限制
+  session:
+    timeout: 60
+  tomcat:
+    max-threads: 150   # tomcat最大线程数，默认200
+    uri-encoding: utf-8
+#    basedir: D:/   # tomcat日志存放目录
+#    accesslog:
+#      enabled: true   # 打开tomcat的access日志
+#      pattern:   # access日志格式
+#      directory:    #access目录位置，默认在basedir/logs
+#logging:
+#  path: D:/   # 日志文件目录
+#  file:   # 日志文件名称，默认spring.log
+########## spring配置 #########
+#spring:
+#  profiles:
+#    active: local # 子配置
+#  freemarker.cache: false   # 关闭缓存及时刷新
+#  thymeleaf.cache: false   # 关闭缓存及时刷新
+#  devtools:
+#    restart:
+#      enabled: true   # 热部署生效
+#      additional-paths: galaxy-service/src/main/java   # 设置重启的目录
+#      exclude: WEB-INF
+#      trigger-file: restart.trigger
+#  mvc.view:
+#    prefix: WEB-INF/html/
+#    suffix: .html
+
+######### MyBatis #########
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: com.cyw.origin.frame.galaxy.*.dao
+mapper:
+  mappers:
+  not-empty: false
+  identity: MYSQL
