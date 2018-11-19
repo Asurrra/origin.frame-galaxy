@@ -1,11 +1,11 @@
 package com.cyw.origin.frame.galaxy;
 
+import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
+import com.cyw.origin.frame.galaxy.listener.CommonBeanListener;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.Bean;
 
 /**
  * springboot启动文件
@@ -13,14 +13,18 @@ import org.springframework.context.annotation.ImportResource;
  * @version 1.0.0
  * @date 2018/3/19
  */
-@SpringBootApplication
-@ComponentScan(basePackages = "com.cyw.origin.frame.galaxy")
+@SpringBootApplication(scanBasePackages = "com.cyw.origin.frame.galaxy")
+@EnableApolloConfig({"weimob.arch-common", "my-jdbc", "redis","common"})
 @MapperScan("com.cyw.origin.frame.galaxy.**.dao")
 public class GalaxyApplication {
     public static void main(String[] args) {
         SpringApplication.run(GalaxyApplication.class,args);
     }
 
+    @Bean
+    public CommonBeanListener commonBeanListener() {
+        return new CommonBeanListener();
+    }
 /*
     @Bean
     public FilterRegistrationBean catFilterRegistration() {

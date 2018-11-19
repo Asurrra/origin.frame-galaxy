@@ -1,4 +1,4 @@
-package com.cyw.origin.frame.galaxy.conf;
+//package com.cyw.origin.frame.galaxy.conf;
 //
 //import com.alibaba.druid.pool.DruidDataSource;
 //import org.apache.ibatis.session.SqlSessionFactory;
@@ -15,9 +15,9 @@ package com.cyw.origin.frame.galaxy.conf;
 ///**
 // * Created by weimob on 2017/7/25.
 // */
-////@Configuration
-////@MapperScan(basePackages = {"com.weimob.saas.promotion.bargain.dao"}, sqlSessionFactoryRef = "sqlSessionFactory")
-////@AutoConfigureAfter(MysqlConf.class)
+//@Configuration
+//@MapperScan(basePackages = {"com.weimob.saas.promotion.bargain.dao"}, sqlSessionFactoryRef = "sqlSessionFactory")
+//@AutoConfigureAfter(MysqlConf.class)
 //public class MybatisConf {
 //    @Autowired
 //    private DruidDataSource dataSource;

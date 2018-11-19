@@ -7,6 +7,7 @@ import com.cyw.origin.frame.galaxy.demo.domain.Demo;
 import com.cyw.origin.frame.galaxy.demo.manage.DemoManage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,6 +23,12 @@ public class DemoManageImpl implements DemoManage {
     @Autowired
     private AsyncConfig asyncConfig;
 
+    @Autowired
+    private AsyncConfig uploadFileExecutor;
+
+    @Value("${spring.common}")
+    private String test;
+
     @Override
     public Integer threadTest(Demo demo) {
         return demoDao.save(demo);
@@ -29,15 +36,17 @@ public class DemoManageImpl implements DemoManage {
 
     @Override
     public void threadTask() {
-        asyncConfig.getAsyncExecutor().execute(new ThreadTaskWorker());
-        while (true) {
-            try {
-                Thread.sleep(1000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("线程名称：" + Thread.currentThread().getName());
-        }
+        System.out.println("test:" + test);
+
+//        asyncConfig.getAsyncExecutor().execute(new ThreadTaskWorker());
+//        while (true) {
+//            try {
+//                Thread.sleep(1000L);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            System.out.println("线程名称：" + Thread.currentThread().getName());
+//        }
     }
 
     public class ThreadTaskWorker implements Runnable {

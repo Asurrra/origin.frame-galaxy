@@ -19,7 +19,7 @@ server:
 ########## spring配置 #########
 #spring:
 #  profiles:
-#    active: local # 子配置
+#    active: dev # 子配置
 #  freemarker.cache: false   # 关闭缓存及时刷新
 #  thymeleaf.cache: false   # 关闭缓存及时刷新
 #  devtools:

@@ -1,18 +1,27 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
+    <!-- 日志记录的aop配置 -->
+    <!--<bean id="serverAopLog" class="com.weimob.saas.wolfram.supplier.utils.AopLog"/>
+    <aop:config>
+        <aop:pointcut expression="execution(* com.cyw.origin.frame.galaxy..*(..)))"
+                      id="serverLogPointCut" />
+        <aop:aspect id="serverLogAspect" ref="serverAopLog" order="1">
+            <aop:around method="around" pointcut-ref="serverLogPointCut" />
+        </aop:aspect>
+    </aop:config>-->
 
-    <!-- 配置发送券的任务队列数据 -->
+    <!-- 线程池 -->
     <bean id="uploadFileExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
         <!-- 线程池维护的核心线程数量 -->
-        <property name="corePoolSize" value="10"/>
-        <!-- 线程池维护线程所允许的空闲时间 -->
-        <property name="keepAliveSeconds" value="30000"/>
+        <property name="corePoolSize" value="20"/>
         <!-- 线程池维护线程的最大数量 -->
         <property name="maxPoolSize" value="50"/>
         <!-- 线程池所使用的缓冲队列 -->
-        <property name="queueCapacity" value="10"/>
+        <property name="queueCapacity" value="30"/>
+        <!-- 线程池维护线程所允许的空闲时间 -->
+        <property name="keepAliveSeconds" value="30000"/>
     </bean>
 
 </beans>
