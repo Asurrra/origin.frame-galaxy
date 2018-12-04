@@ -23,6 +23,10 @@ public class MyApplicationRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments var1) throws InterruptedException {
         System.out.println("MyApplicationRunner class will be execute when the project was started!");
+        for (; ; ) {
+            demoManage.threadTask();
+            Thread.sleep(3000L);
+        }
 //        demoManage.threadTest(new Demo(1L, "test", 18, new Date()));
     }
 

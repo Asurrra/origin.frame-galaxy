@@ -1,4 +1,4 @@
-package com.cyw.origin.frame.galaxy.api.api.dto;
+package com.cyw.origin.frame.galaxy.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

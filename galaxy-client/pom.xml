@@ -12,6 +12,12 @@
     <name>galaxy-client</name>
     <description>galaxy-client</description>
 
+    <parent>
+        <groupId>com.cyw.origin.frame</groupId>
+        <artifactId>origin.frame-galaxy</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
     <dependencies>
         <dependency>
             <groupId>com.cyw.origin.frame</groupId>
@@ -20,5 +26,41 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <finalName>galaxy-client</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>${encoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>weimob.repo</id>
+            <name>Nexus Release Repository</name>
+            <url>http://xxx.com/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>weimob.repo</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://xxx.com/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

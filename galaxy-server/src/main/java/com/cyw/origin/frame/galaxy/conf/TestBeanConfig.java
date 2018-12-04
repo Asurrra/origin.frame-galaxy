@@ -13,6 +13,7 @@ public class TestBeanConfig {
     public TestBean testBean() {
         return new TestBean();
     }
+
     @Bean
     public DubboBean dubboBean() {
         return new DubboBean();

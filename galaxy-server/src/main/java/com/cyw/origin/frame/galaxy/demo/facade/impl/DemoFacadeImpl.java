@@ -1,7 +1,7 @@
 package com.cyw.origin.frame.galaxy.demo.facade.impl;
 
-import com.cyw.origin.frame.galaxy.api.api.dto.ThreadDto;
-import com.cyw.origin.frame.galaxy.api.api.facade.thread.ThreadFacade;
+import com.cyw.origin.frame.galaxy.api.dto.ThreadDto;
+import com.cyw.origin.frame.galaxy.api.facade.thread.ThreadFacade;
 import com.cyw.origin.frame.galaxy.common.enums.ReturnCode;
 import com.cyw.origin.frame.galaxy.common.response.resp.SoaResp;
 import com.cyw.origin.frame.galaxy.demo.service.DemoService;

@@ -1,6 +1,6 @@
-package com.cyw.origin.frame.galaxy.api.api.facade.thread;
+package com.cyw.origin.frame.galaxy.api.facade.thread;
 
-import com.cyw.origin.frame.galaxy.api.api.dto.ThreadDto;
+import com.cyw.origin.frame.galaxy.api.dto.ThreadDto;
 import com.weimob.soa.common.response.SoaResponse;
 
 /**

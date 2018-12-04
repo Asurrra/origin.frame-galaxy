@@ -1,13 +1,9 @@
 package com.cyw.origin.frame.galaxy;
 
 import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
-import com.cyw.origin.frame.galaxy.bean.TestBean;
-import com.cyw.origin.frame.galaxy.listener.CommonBeanListener;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * springboot启动文件
@@ -22,6 +18,7 @@ public class GalaxyApplication {
     public static void main(String[] args) {
         SpringApplication.run(GalaxyApplication.class, args);
     }
+
 
 /*
     @Bean

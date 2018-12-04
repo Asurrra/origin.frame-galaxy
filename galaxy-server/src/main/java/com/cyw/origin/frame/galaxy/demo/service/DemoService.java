@@ -1,6 +1,6 @@
 package com.cyw.origin.frame.galaxy.demo.service;
 
-import com.cyw.origin.frame.galaxy.api.api.dto.ThreadDto;
+import com.cyw.origin.frame.galaxy.api.dto.ThreadDto;
 
 /**
  * @author yiwen.chang

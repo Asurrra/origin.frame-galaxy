@@ -1,6 +1,6 @@
 package com.cyw.origin.frame.galaxy.demo.service.impl;
 
-import com.cyw.origin.frame.galaxy.api.api.dto.ThreadDto;
+import com.cyw.origin.frame.galaxy.api.dto.ThreadDto;
 import com.cyw.origin.frame.galaxy.demo.domain.Demo;
 import com.cyw.origin.frame.galaxy.demo.manage.DemoManage;
 import com.cyw.origin.frame.galaxy.demo.service.DemoService;
