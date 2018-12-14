@@ -105,6 +105,19 @@
             <artifactId>poi-ooxml</artifactId>
             <version>3.11-beta1</version>
         </dependency>
-
     </dependencies>
+
+    <!--<distributionManagement>
+        <repository>
+            <id>weimob.repo</id>
+            <name>Nexus Release Repository</name>
+            <url>http://xxx.com/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>weimob.repo</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://xxx.com/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>-->
+
 </project>

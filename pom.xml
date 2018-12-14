@@ -36,16 +36,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>com.cyw.origin.frame</groupId>
-                <artifactId>galaxy-interface</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cyw.origin.frame</groupId>
-                <artifactId>galaxy-common</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
             <!-- ****************************** SpringBoot ******************************-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -179,18 +169,5 @@
             </plugins>
         </pluginManagement>
     </build>-->
-
-    <!--<distributionManagement>
-        <repository>
-            <id>weimob.repo</id>
-            <name>Nexus Release Repository</name>
-            <url>http://xxx.com/content/repositories/releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>weimob.repo</id>
-            <name>Nexus Snapshot Repository</name>
-            <url>http://xxx.com/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>-->
 
 </project>
