@@ -3,14 +3,12 @@ package com.cyw.origin.frame.galaxy.demo.service.impl;
 import com.cyw.origin.frame.galaxy.api.dto.ThreadDto;
 import com.cyw.origin.frame.galaxy.bean.DubboBean;
 import com.cyw.origin.frame.galaxy.bean.TestBean;
-import com.cyw.origin.frame.galaxy.conf.AsyncConfig;
 import com.cyw.origin.frame.galaxy.demo.dao.DemoMapper;
 import com.cyw.origin.frame.galaxy.demo.domain.Demo;
 import com.cyw.origin.frame.galaxy.demo.service.DemoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -28,42 +26,10 @@ public class DemoServiceImpl implements DemoService {
     private DemoMapper demoMapper;
 
     @Autowired
-    private AsyncConfig asyncConfig;
-
-    @Value("${spring.common}")
-    private String test;
-
-    @Autowired
     private TestBean testBean;
 
     @Autowired
     private DubboBean dubboBean;
-
-    public class ThreadTaskWorker implements Runnable {
-
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    Thread.sleep(1000L);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("线程名称：" + Thread.currentThread().getName());
-            }
-        }
-
-        //        @Async("asyncServiceExecutor")
-        public void executeAsyncStart() {
-            System.out.println(Thread.currentThread().getName() + "---start!");
-            try{
-                Thread.sleep(5000);
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-            System.out.println("end!");
-        }
-    }
 
     @Override
     public Integer threadTest(ThreadDto dto) {

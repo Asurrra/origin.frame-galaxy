@@ -1,13 +1,11 @@
 package com.cyw.origin.frame.galaxy.demo.dao;
 
 import com.cyw.origin.frame.galaxy.demo.domain.Demo;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
  * @author yiwen.chang
  */
-@Mapper
 public interface DemoMapper {
 
     Integer save(@Param("entity")Demo demo);

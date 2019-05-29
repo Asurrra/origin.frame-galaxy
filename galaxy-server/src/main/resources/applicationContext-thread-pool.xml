@@ -1,5 +1,5 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
     <!-- 日志记录的aop配置 -->
@@ -13,15 +13,15 @@
     </aop:config>-->
 
     <!-- 线程池 -->
-    <bean id="uploadFileExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-        <!-- 线程池维护的核心线程数量 -->
+    <!--<bean id="uploadFileExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        &lt;!&ndash; 线程池维护的核心线程数量 &ndash;&gt;
         <property name="corePoolSize" value="20"/>
-        <!-- 线程池维护线程的最大数量 -->
+        &lt;!&ndash; 线程池维护线程的最大数量 &ndash;&gt;
         <property name="maxPoolSize" value="50"/>
-        <!-- 线程池所使用的缓冲队列 -->
+        &lt;!&ndash; 线程池所使用的缓冲队列 &ndash;&gt;
         <property name="queueCapacity" value="30"/>
-        <!-- 线程池维护线程所允许的空闲时间 -->
+        &lt;!&ndash; 线程池维护线程所允许的空闲时间 &ndash;&gt;
         <property name="keepAliveSeconds" value="30000"/>
-    </bean>
+    </bean>-->
 
 </beans>

@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
@@ -16,7 +15,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  * @version 1.0.0
  */
 @Slf4j
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class, scanBasePackages = "com.cyw.origin.frame.galaxy")
+@SpringBootApplication(scanBasePackages = "com.cyw.origin.frame.galaxy")
 //@EnableApolloConfig({"weimob.arch-common", "my-jdbc", "redis", "common", "dubbo"})
 @MapperScan("com.cyw.origin.frame.galaxy.*.dao")
 public class GalaxyApplication extends SpringBootServletInitializer {
