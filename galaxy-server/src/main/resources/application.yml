@@ -3,8 +3,6 @@ server:
   port: 8080   # 端口号
 #  context-path: /galaxy   # 访问地址
 #  address: 127.0.0.1   # 服务器启动ip限制
-  session:
-    timeout: 60
   tomcat:
     max-threads: 150   # tomcat最大线程数，默认200
     uri-encoding: utf-8

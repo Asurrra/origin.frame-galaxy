@@ -16,6 +16,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class ThreadDto implements Serializable {
 
+    private static final long serialVersionUID = -5671993829382463987L;
+
     private Long id;
 
     private String name;

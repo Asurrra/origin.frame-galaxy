@@ -35,11 +35,11 @@
     <logger name="java.sql.PreparedStatement" level="DEBUG"/>
 
     <!--cat-->
-    <appender name="CAT" class="com.dianping.cat.logback.CatLogbackAppender">
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>ERROR</level>
-        </filter>
-    </appender>
+<!--    <appender name="CAT" class="com.dianping.cat.logback.CatLogbackAppender">-->
+<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+<!--            <level>ERROR</level>-->
+<!--        </filter>-->
+<!--    </appender>-->
 
     <!-- 日志输出级别 -->
     <root level="INFO">

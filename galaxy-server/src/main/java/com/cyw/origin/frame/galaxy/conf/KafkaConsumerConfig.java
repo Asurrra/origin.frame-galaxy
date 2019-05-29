@@ -5,8 +5,6 @@ import com.fasterxml.jackson.databind.deser.std.StringDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.config.KafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
@@ -25,8 +23,8 @@ import java.util.regex.Pattern;
  * @date: 2018/12/6
  * @version: 1.0.0
  */
-@Configuration
-@EnableKafka
+//@Configuration
+//@EnableKafka
 public class KafkaConsumerConfig {
 
     @Value("${bootstrap.servers}")

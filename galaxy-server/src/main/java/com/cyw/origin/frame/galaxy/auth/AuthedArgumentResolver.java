@@ -1,6 +1,6 @@
 package com.cyw.origin.frame.galaxy.auth;
 
-import com.alibaba.dubbo.common.json.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.cyw.origin.frame.galaxy.auth.annotation.AuthedUser;
 import com.cyw.origin.frame.galaxy.common.response.SessionInfo;
 import com.cyw.origin.frame.galaxy.util.CryptUtils;
@@ -47,7 +47,7 @@ public class AuthedArgumentResolver implements HandlerMethodArgumentResolver {
             /**String token = "svzan71gigAOdgHqZL0lijHI+M/AMLt1rdEnmHKZanAZ1Jc4rSHwUf5JB0PqdHRp22PGYYWQEma/DaXG8rvMi5VqY6OSjKWczmPS1EIhBS6gh2B1JZLOAw=="; */
             String jsonInfo = CryptUtils.decryptDES(key, CryptUtils.key);
             log.info("++ jsonInfo = {} ++", jsonInfo);
-            SessionInfo sessionInfo = JSON.parse(jsonInfo, SessionInfo.class);
+            SessionInfo sessionInfo = JSONObject.parseObject(jsonInfo, SessionInfo.class);
             return sessionInfo;
         } catch (Exception e) {
             log.error("++get user info failed! + {}", e);

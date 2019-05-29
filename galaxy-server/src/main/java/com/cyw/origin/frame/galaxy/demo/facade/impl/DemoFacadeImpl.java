@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @author yiwen.chang
  */
 @Slf4j
-@Service
+@Service("threadFacade")
 public class DemoFacadeImpl implements ThreadFacade {
 
     @Autowired
