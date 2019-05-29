@@ -5,7 +5,6 @@ import com.ctrip.framework.apollo.spring.annotation.ApolloConfig;
 import com.cyw.origin.frame.galaxy.bean.DubboBean;
 import com.cyw.origin.frame.galaxy.bean.TestBean;
 import com.cyw.origin.frame.galaxy.conf.AsyncConfig;
-import com.cyw.origin.frame.galaxy.conf.ExecutorConfig;
 import com.cyw.origin.frame.galaxy.demo.dao.DemoDao;
 import com.cyw.origin.frame.galaxy.demo.domain.Demo;
 import com.cyw.origin.frame.galaxy.demo.manage.DemoManage;

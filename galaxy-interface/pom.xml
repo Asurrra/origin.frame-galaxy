@@ -90,12 +90,12 @@
 
     <!--<distributionManagement>
         <repository>
-            <id>weimob.repo</id>
+            <id>origin.repo</id>
             <name>Nexus Release Repository</name>
             <url>http://xxx.com/content/repositories/releases</url>
         </repository>
         <snapshotRepository>
-            <id>weimob.repo</id>
+            <id>origin.repo</id>
             <name>Nexus Snapshot Repository</name>
             <url>http://xxx.com/content/repositories/snapshots</url>
         </snapshotRepository>
