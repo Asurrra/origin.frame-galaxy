@@ -7,7 +7,7 @@
         <!--<plugin type="com.weimob.mengdian.med.mybatis.generator.CustomStylePlugin"/>-->
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/new_cloud_ops?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=true"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=true"
                         userId="root"
                         password="ilovemysql^^^"/>
 
@@ -34,12 +34,12 @@
 
         <!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法 -->
         <!--<property name="useActualColumnNames" value="false"/>-->
-        <table tableName="menu" domainObjectName="Menu" enableSelectByExample="false"
+        <table tableName="task_info" domainObjectName="TaskInfo" enableSelectByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableCountByExample="false">
-            <generatedKey column="pack_id" sqlStatement="JDBC" identity="true"/>
+            <generatedKey column="id" sqlStatement="JDBC" identity="true"/>
             <!--<columnOverride column="params" javaType="java.lang.String" jdbcType="VARCHAR" />-->
             <ignoreColumn column="create_time"/>
-            <ignoreColumn column="update_time"/>
+            <ignoreColumn column="is_deleted"/>
         </table>
     </context>
 </generatorConfiguration>

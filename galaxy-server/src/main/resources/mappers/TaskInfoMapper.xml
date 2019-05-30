@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cyw.origin.frame.galaxy.demo.dao.TaskInfoMapper">
+    <resultMap id="BaseResultMap" type="com.cyw.origin.frame.galaxy.demo.domain.TaskInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="biz_id" property="bizId" jdbcType="VARCHAR"/>
+        <result column="biz_type" property="bizType" jdbcType="TINYINT"/>
+        <result column="biz_status" property="bizStatus" jdbcType="TINYINT"/>
+        <result column="sync_status" property="syncStatus" jdbcType="TINYINT"/>
+    </resultMap>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from task_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <insert id="insertSelective" parameterType="com.cyw.origin.frame.galaxy.demo.domain.TaskInfo"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into task_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bizId != null">
+                biz_id,
+            </if>
+            <if test="bizType != null">
+                biz_type,
+            </if>
+            <if test="bizStatus != null">
+                biz_status,
+            </if>
+            <if test="syncStatus != null">
+                sync_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bizId != null">
+                #{bizId,jdbcType=VARCHAR},
+            </if>
+            <if test="bizType != null">
+                #{bizType,jdbcType=TINYINT},
+            </if>
+            <if test="bizStatus != null">
+                #{bizStatus,jdbcType=TINYINT},
+            </if>
+            <if test="syncStatus != null">
+                #{syncStatus,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cyw.origin.frame.galaxy.demo.domain.TaskInfo">
+        update task_info
+        <set>
+            <if test="bizId != null">
+                biz_id = #{bizId,jdbcType=VARCHAR},
+            </if>
+            <if test="bizType != null">
+                biz_type = #{bizType,jdbcType=TINYINT},
+            </if>
+            <if test="bizStatus != null">
+                biz_status = #{bizStatus,jdbcType=TINYINT},
+            </if>
+            <if test="syncStatus != null">
+                sync_status = #{syncStatus,jdbcType=TINYINT},
+            </if>
+            update_time = now(),
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.cyw.origin.frame.galaxy.demo.domain.TaskInfo"></update>
+    <insert id="insert" parameterType="com.cyw.origin.frame.galaxy.demo.domain.TaskInfo" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into task_info (biz_id, biz_type, biz_status,
+          sync_status)
+        values (#{bizId,jdbcType=VARCHAR}, #{bizType,jdbcType=TINYINT}, #{bizStatus,jdbcType=TINYINT},
+          #{syncStatus,jdbcType=TINYINT})
+    </insert>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from task_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <sql id="Base_Column_List">
+        id, biz_id, biz_type, biz_status, sync_status
+    </sql>
+
+    <!-- Customer SQL Area -->
+
+    <select id="selectTaskByBizType" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from task_info
+        <where>
+            sync_status = 1
+            <if test="bizType != null">
+                and biz_type = #{bizType,jdbcType=TINYINT}
+            </if>
+        </where>
+        order by biz_status, biz_type asc
+    </select>
+
+    <!-- Customer SQL Area -->
+
+</mapper>
