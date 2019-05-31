@@ -1,5 +1,6 @@
 package com.cyw.origin.frame.galaxy.conf;
 
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.boot.SpringBootConfiguration;
@@ -21,15 +22,18 @@ import java.util.concurrent.ThreadPoolExecutor;
 @SpringBootConfiguration
 public class AsyncConfig implements AsyncConfigurer {
 
+    @Setter
+    private String threadNamePrefix;
+
     @Override
     public Executor getAsyncExecutor() {
-        log.info("<========== AsyncConfig start ==========>");
+        log.info("<========== AsyncConfig[{}] init ==========>", threadNamePrefix);
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
         threadPoolTaskExecutor.setCorePoolSize(5);
         threadPoolTaskExecutor.setMaxPoolSize(10);
         threadPoolTaskExecutor.setQueueCapacity(50);
         threadPoolTaskExecutor.setKeepAliveSeconds(60);
-        threadPoolTaskExecutor.setThreadNamePrefix("galaxy-");
+        threadPoolTaskExecutor.setThreadNamePrefix(threadNamePrefix + "-");
         threadPoolTaskExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         threadPoolTaskExecutor.setWaitForTasksToCompleteOnShutdown(true);
         threadPoolTaskExecutor.setAwaitTerminationSeconds(60);

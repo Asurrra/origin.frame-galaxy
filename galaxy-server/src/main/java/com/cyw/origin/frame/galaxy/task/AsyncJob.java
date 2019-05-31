@@ -1,5 +1,7 @@
 package com.cyw.origin.frame.galaxy.task;
 
+import com.alibaba.fastjson.JSONObject;
+import com.cyw.origin.frame.galaxy.common.enums.SyncConfigBizTypeEnum;
 import com.cyw.origin.frame.galaxy.conf.AsyncConfig;
 import com.cyw.origin.frame.galaxy.demo.dao.TaskInfoMapper;
 import com.cyw.origin.frame.galaxy.demo.domain.TaskInfo;
@@ -7,12 +9,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 @Slf4j
 @Component
@@ -66,31 +70,58 @@ public class AsyncJob {
                     return oldValue;
                 });
             }
-            Integer size1 = 0;
             for (Integer integer : taskMap1.keySet()) {
                 System.out.println(integer);
                 for (String bizId : taskMap1.get(integer).keySet()) {
-                    size1 += taskMap1.get(integer).get(bizId).size();
                     System.out.println(bizId + " - " + taskMap1.get(integer).get(bizId));
                 }
                 System.out.println();
             }
-            System.out.println(size1);
             log.info("====== AsyncJob schedule end! use time:{} ms =======", System.currentTimeMillis() - startTime1);
-
-
+            for (Integer integer : taskMap1.keySet()) {
+                asyncConfig.setThreadNamePrefix(SyncConfigBizTypeEnum.getKeyByValue(integer));
+                ThreadPoolTaskExecutor executor = (ThreadPoolTaskExecutor) asyncConfig.getAsyncExecutor();
+                for (Map.Entry<String, List<TaskInfo>> entry : taskMap1.get(integer).entrySet()) {
+                    executor.submit(new AsyncThread(entry.getKey(), entry.getValue(), taskInfoMapper));
+                }
+            }
         }
+    }
 
-//        Executor executor = asyncConfig.getAsyncExecutor();
+}
 
+@Slf4j
+class AsyncThread implements Callable {
 
-//        if (taskInfoList.size() > 100) {
-//            log.warn("single队列消费能力不足,当前队列数：{}", taskInfoList.size());
-//            try {
-//            } catch (Exception e) {
-//                log.error("", e);
-//            }
-//        }
+    private String orderNo;
+
+    private List<TaskInfo> taskInfos;
+
+    private TaskInfoMapper taskInfoMapper;
+
+    public AsyncThread(String orderNo, List<TaskInfo> taskInfos, TaskInfoMapper taskInfoMapper) {
+        this.orderNo = orderNo;
+        this.taskInfos = taskInfos;
+        this.taskInfoMapper = taskInfoMapper;
+    }
+
+    @Override
+    public Boolean call() throws Exception {
+        try {
+            int i = 1;
+            for (TaskInfo taskInfo : taskInfos) {
+                System.out.println(Thread.currentThread().getName() + " - " + orderNo + "-" + JSONObject.toJSONString(taskInfo));
+                TaskInfo record = new TaskInfo();
+                record.setId(taskInfo.getId());
+                record.setSyncStatus(i);
+                taskInfoMapper.updateByPrimaryKeySelective(record);
+                i++;
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

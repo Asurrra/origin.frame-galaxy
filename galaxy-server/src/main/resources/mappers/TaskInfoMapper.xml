@@ -65,7 +65,15 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.cyw.origin.frame.galaxy.demo.domain.TaskInfo"></update>
+    <update id="updateByPrimaryKey" parameterType="com.cyw.origin.frame.galaxy.demo.domain.TaskInfo">
+        update task_info
+        set biz_id = #{bizId,jdbcType=VARCHAR},
+          biz_type = #{bizType,jdbcType=TINYINT},
+          biz_status = #{bizStatus,jdbcType=TINYINT},
+          sync_status = #{syncStatus,jdbcType=TINYINT},
+          update_time = now()
+        where id = #{id,jdbcType=BIGINT}
+    </update>
     <insert id="insert" parameterType="com.cyw.origin.frame.galaxy.demo.domain.TaskInfo" useGeneratedKeys="true"
             keyProperty="id">
         insert into task_info (biz_id, biz_type, biz_status,
