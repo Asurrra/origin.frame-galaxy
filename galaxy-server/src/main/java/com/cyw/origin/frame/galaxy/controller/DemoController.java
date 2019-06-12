@@ -1,29 +1,26 @@
-package com.cyw.origin.frame.galaxy.api.demo;
+package com.cyw.origin.frame.galaxy.controller;
 
-import com.cyw.origin.frame.galaxy.api.dto.ThreadDto;
 import com.cyw.origin.frame.galaxy.common.response.CommonResponse;
 import com.cyw.origin.frame.galaxy.common.response.resp.CommonResp;
-import com.cyw.origin.frame.galaxy.vo.ThreadVo;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 /**
  * @author yiwen.chang
  */
 @RestController
 @RequestMapping("/demo")
-@Api(value = "DemoController")
 public class DemoController {
 
-    @ApiOperation(value = "hello", httpMethod = "POST", produces = "application/json; charset=utf-8", notes = "hello", response = CommonResponse.class)
     @RequestMapping(value = "/hello", method = RequestMethod.POST)
-    public CommonResponse<ThreadVo> say(@RequestBody ThreadDto threadDto) {
+    public CommonResponse say(@RequestBody Map<String, Object> threadDto) {
         try {
-            Thread.sleep(3000L);
+            System.out.println(Thread.currentThread().getName() + "-test");
+            Thread.sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

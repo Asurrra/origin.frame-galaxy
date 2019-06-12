@@ -4,7 +4,7 @@ server:
 #  context-path: /galaxy   # 访问地址
 #  address: 127.0.0.1   # 服务器启动ip限制
   tomcat:
-    max-threads: 150   # tomcat最大线程数，默认200
+    max-threads: 60   # tomcat最大线程数，默认200
     uri-encoding: utf-8
 #    basedir: D:/   # tomcat日志存放目录
 #    accesslog:

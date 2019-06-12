@@ -1,22 +1,17 @@
 package com.cyw.origin.frame.galaxy.task;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cyw.origin.frame.galaxy.common.enums.SyncConfigBizTypeEnum;
-import com.cyw.origin.frame.galaxy.conf.AsyncConfig;
 import com.cyw.origin.frame.galaxy.demo.dao.TaskInfoMapper;
 import com.cyw.origin.frame.galaxy.demo.domain.TaskInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ThreadPoolExecutor;
 
 @Slf4j
 @Component
@@ -26,10 +21,33 @@ public class AsyncJob {
     @Autowired
     private TaskInfoMapper taskInfoMapper;
 
-    @Autowired
-    private AsyncConfig asyncConfig;
+    private ThreadPoolTaskExecutor orderAndRightExecutor = null;
+    private ThreadPoolTaskExecutor couponExecutor = null;
+    private ThreadPoolTaskExecutor otherExecutor = null;
 
-    @Scheduled(initialDelay = 1000, fixedDelay = 5 * 1000)
+//    @PostConstruct
+    private void executorInit() {
+        orderAndRightExecutor = init("ORDER-", 10, 2000);
+        couponExecutor = init("COUPON-", 5, 500);
+        otherExecutor = init("OTHER-", 5, 200);
+    }
+
+    private ThreadPoolTaskExecutor init(String threadName, Integer corePoolSize, Integer queueCapacity) {
+        log.info("初始化线程池：{}", threadName);
+        ThreadPoolTaskExecutor executorService = new ThreadPoolTaskExecutor();
+        executorService.setCorePoolSize(corePoolSize);
+        executorService.setMaxPoolSize(corePoolSize * 3);
+        executorService.setQueueCapacity(queueCapacity);
+        executorService.setKeepAliveSeconds(60);
+        executorService.setThreadNamePrefix(threadName);
+        executorService.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+        executorService.setWaitForTasksToCompleteOnShutdown(true);
+        executorService.setAwaitTerminationSeconds(60);
+        executorService.initialize();
+        return executorService;
+    }
+
+//    @Scheduled(initialDelay = 1000, fixedDelay = 5 * 1000)
     public void orderRun() {
         log.info("====== AsyncJob schedule start! =======");
         List<TaskInfo> taskInfoList = taskInfoMapper.selectTaskByBizType(null);
@@ -77,14 +95,24 @@ public class AsyncJob {
                 }
                 System.out.println();
             }
-            log.info("====== AsyncJob schedule end! use time:{} ms =======", System.currentTimeMillis() - startTime1);
+            List<Integer> orderList = Arrays.asList(-1, 0, 1, 7, 9, 10, 11);
+            List<Integer> couponList = Arrays.asList(5, 6);
             for (Integer integer : taskMap1.keySet()) {
-                asyncConfig.setThreadNamePrefix(SyncConfigBizTypeEnum.getKeyByValue(integer));
-                ThreadPoolTaskExecutor executor = (ThreadPoolTaskExecutor) asyncConfig.getAsyncExecutor();
+//                ThreadPoolTaskExecutor executor = init(SyncConfigBizTypeEnum.getKeyByValue(integer), 10, 500);
+                ThreadPoolTaskExecutor executor;
+                if (orderList.contains(integer)) {
+                    executor = orderAndRightExecutor;
+                } else if (couponList.contains(integer)) {
+                    executor = couponExecutor;
+                } else {
+                    executor = otherExecutor;
+                }
                 for (Map.Entry<String, List<TaskInfo>> entry : taskMap1.get(integer).entrySet()) {
                     executor.submit(new AsyncThread(entry.getKey(), entry.getValue(), taskInfoMapper));
                 }
+//                executor.shutdown();
             }
+            log.info("====== AsyncJob schedule end! use time:{} ms =======", System.currentTimeMillis() - startTime1);
         }
     }
 
